@@ -10,6 +10,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
+    "consistent-return": "off",
     "comma-dangle": "off",
     "no-unused-vars": "warn",
     "quotes": [2, "double", { "avoidEscape": true }]

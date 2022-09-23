@@ -3,15 +3,18 @@ const cors = require("cors");
 const path = require("path");
 
 // requires
+const app = require("./config/app");
 const router = require("./router");
 require("./database");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use("/api", router);
+const server = express();
+server.use(cors());
+server.use(express.json());
+server.use("/api", router);
 
 // static folder
-app.use("/storage", express.static(path.join(__dirname, "storage")));
+server.use("/storage", express.static(path.join(__dirname, "storage")));
 
-app.listen(8000);
+server.listen(app.port, () => {
+  console.log(`Server ${app.name} is running on port ${app.port}`);
+});

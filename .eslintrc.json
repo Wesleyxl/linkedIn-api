@@ -10,6 +10,7 @@
     "ecmaVersion": "latest"
   },
   "rules": {
+    "implicit-arrow-linebreak": "warn",
     "consistent-return": "off",
     "comma-dangle": "off",
     "no-unused-vars": "warn",

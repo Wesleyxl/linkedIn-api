@@ -1,4 +1,8 @@
-const { registerServices } = require("../services/AuthServices");
+const {
+  registerServices,
+  loginServices,
+  meServices,
+} = require("../services/AuthServices");
 
 const register = async (req, res) => {
   try {
@@ -40,10 +44,29 @@ const login = async (req, res) => {
       return res.status(400).json({ error: "the password field is required" });
     }
 
-    return res.json("AuthController login");
+    // login services
+    const response = await loginServices(req);
+
+    if (response.error) {
+      return res.status(400).json({ error: response.error });
+    }
+
+    return res.json(response.data);
   } catch (error) {
     return res.status(400).json({ error });
   }
 };
 
-module.exports = { register, login };
+const me = async (req, res) => {
+  const authId = await res.locals.auth_data.id;
+
+  const response = await meServices(authId);
+
+  if (response.error) {
+    return res.status(400).json({ error: response.error });
+  }
+
+  return res.json(response.data);
+};
+
+module.exports = { register, login, me };

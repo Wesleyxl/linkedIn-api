@@ -14,8 +14,8 @@ class Comment extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.user, { foreignKey: "id", as: "user" });
-    this.belongsTo(models.feed, { foreignKey: "id", as: "feed" });
+    this.belongsTo(models.User, { foreignKey: "id", as: "user" });
+    this.belongsTo(models.Feed, { foreignKey: "id", as: "feed" });
   }
 }
 

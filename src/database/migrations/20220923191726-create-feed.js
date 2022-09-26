@@ -2,15 +2,20 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("feeds", {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       user_id: {
-        references: { model: "users", key: "id" },
+        type: Sequelize.INTEGER,
+        References: {
+          model: "users",
+          key: "id",
+        },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
+        allowNull: false,
       },
       text: {
         type: Sequelize.TEXT,
@@ -22,7 +27,7 @@ module.exports = {
       },
       likes: {
         type: Sequelize.INTEGER,
-        default: 0,
+        defaultValue: 0,
       },
       created_at: {
         type: Sequelize.DATE,

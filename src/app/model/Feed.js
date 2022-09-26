@@ -15,8 +15,8 @@ class Feed extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.user, { foreignKey: "id", as: "user" });
-    this.hasMany(models.comment, { foreignKey: "id", as: "comments" });
+    this.belongsTo(models.User, { foreignKey: "id", as: "user" });
+    this.hasMany(models.Comment, { foreignKey: "id", as: "comments" });
   }
 }
 

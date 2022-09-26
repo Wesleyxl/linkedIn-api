@@ -25,7 +25,7 @@ module.exports = {
       },
       likes: {
         type: Sequelize.INTEGER,
-        default: 0,
+        defaultValue: 0,
       },
       created_at: {
         type: Sequelize.DATE,

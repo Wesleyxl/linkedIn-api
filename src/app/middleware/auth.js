@@ -1,17 +1,22 @@
 const jwt = require("jsonwebtoken");
+const app = require("../../config/app");
 
 const auth = (req, res, next) => {
   const token = req.headers.access_token;
 
   // verify if token exists
   if (!token) {
-    return res.status(401).json({ error: "Token is Required" });
+    return res.status(401).json({
+      error: "Token is Required",
+    });
   }
 
   // validating token
-  jwt.verify(token, process.env.JWT_SECRET || "secret", (err, decoded) => {
+  jwt.verify(token, app.jwt.secret, (err, decoded) => {
     if (err) {
-      return res.status(401).json({ error: "Token is Invalid" });
+      return res.status(401).json({
+        error: "Token is Invalid",
+      });
     }
 
     // saving token

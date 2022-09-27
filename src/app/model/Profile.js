@@ -11,6 +11,7 @@ class Profile extends Model {
         experience: DataTypes.TEXT,
         education: DataTypes.TEXT,
         skills: DataTypes.TEXT,
+        user_id: DataTypes.INTEGER,
       },
       {
         sequelize,
@@ -20,7 +21,10 @@ class Profile extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: "id", as: "user" });
+    this.belongsTo(models.User, {
+      foreignKey: "id",
+      as: "user",
+    });
   }
 }
 

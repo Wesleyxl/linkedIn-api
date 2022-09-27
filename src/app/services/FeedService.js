@@ -35,7 +35,19 @@ const createFeedService = async (req, auth_id) => {
   }
 };
 
-const destroyFeedService = async (publication_id, auth_id) => {};
+const destroyFeedService = async (id) => {
+  try {
+    const feed = await Feed.destroy({ where: { id } });
+
+    if (!feed) {
+      return { error: "Something went wrong" };
+    }
+
+    return { success: true, data: feed };
+  } catch (error) {
+    return { error };
+  }
+};
 
 const updateFeedService = async (req, auth_id) => {};
 

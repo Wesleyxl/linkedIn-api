@@ -7,7 +7,7 @@ const {
 const register = async (req, res) => {
   try {
     // validating fields
-    const { name, email, password } = req.body;
+    const { name, email, career, password } = req.body;
 
     if (!name || name === "") {
       return res.status(400).json({
@@ -17,6 +17,11 @@ const register = async (req, res) => {
     if (!email || email === "") {
       return res.status(400).json({
         error: "the email field is required",
+      });
+    }
+    if (!career || career === "") {
+      return res.status(400).json({
+        error: "the career field is required",
       });
     }
     if (!password || password === "") {

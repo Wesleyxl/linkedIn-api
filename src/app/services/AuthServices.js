@@ -5,7 +5,7 @@ const createUserToken = require("../../helpers/createUserToken");
 
 const registerServices = async (req) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, career, password } = req.body;
 
     // generating password hash
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,6 +16,7 @@ const registerServices = async (req) => {
         name,
         email,
         password: hashedPassword,
+        career,
       });
 
       return {
@@ -26,15 +27,20 @@ const registerServices = async (req) => {
             name: newUser.name,
             email: newUser.email,
             image: newUser.image,
+            career: newUser.career,
           },
           access_token: createUserToken(newUser.id),
         },
       };
     } catch (error) {
-      return { error };
+      return {
+        error,
+      };
     }
   } catch (error) {
-    return { error };
+    return {
+      error,
+    };
   }
 };
 
@@ -44,13 +50,21 @@ const loginServices = async (req) => {
 
     // find user
     const userExist = await User.findOne(
-      { where: { email } },
-      { attributes: ["id", "email", "name", "image", "password"] }
+      {
+        where: {
+          email,
+        },
+      },
+      {
+        attributes: ["id", "email", "name", "image", "career", "password"],
+      }
     );
 
     // verify if user exists
     if (!userExist) {
-      return { error: "email or password is incorrect" };
+      return {
+        error: "email or password is incorrect",
+      };
     }
 
     // validating password
@@ -61,7 +75,9 @@ const loginServices = async (req) => {
 
     // return password errors
     if (!isCorrectPassword) {
-      return { error: "email or password is incorrect" };
+      return {
+        error: "email or password is incorrect",
+      };
     }
 
     return {
@@ -72,25 +88,38 @@ const loginServices = async (req) => {
           name: userExist.name,
           email: userExist.email,
           image: userExist.image,
+          career: userExist.career,
         },
         access_token: createUserToken(userExist.id),
       },
     };
   } catch (error) {
-    return { error };
+    return {
+      error,
+    };
   }
 };
 
 const meServices = async (id) => {
   const user = await User.findByPk(id, {
-    attributes: { exclude: "password" },
+    attributes: {
+      exclude: "password",
+    },
   });
 
   if (!user) {
-    return { error: "user not found" };
+    return {
+      error: "user not found",
+    };
   }
 
-  return { data: user };
+  return {
+    data: user,
+  };
 };
 
-module.exports = { registerServices, loginServices, meServices };
+module.exports = {
+  registerServices,
+  loginServices,
+  meServices,
+};

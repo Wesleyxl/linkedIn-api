@@ -29,10 +29,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      career: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       experience: {
         type: Sequelize.TEXT,
         allowNull: true,

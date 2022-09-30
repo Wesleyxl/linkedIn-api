@@ -7,6 +7,7 @@ class Feed extends Model {
         text: DataTypes.TEXT,
         image: DataTypes.STRING,
         likes: DataTypes.INTEGER,
+        user_id: DataTypes.INTEGER,
       },
       {
         sequelize,
@@ -15,8 +16,14 @@ class Feed extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: "id", as: "user" });
-    this.hasMany(models.Comment, { foreignKey: "id", as: "comments" });
+    this.belongsTo(models.User, {
+      foreignKey: "id",
+      as: "user",
+    });
+    this.hasMany(models.Comment, {
+      foreignKey: "id",
+      as: "comments",
+    });
   }
 }
 

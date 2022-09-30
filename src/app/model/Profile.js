@@ -7,7 +7,6 @@ class Profile extends Model {
         about: DataTypes.TEXT,
         country: DataTypes.STRING,
         state: DataTypes.STRING,
-        career: DataTypes.STRING,
         experience: DataTypes.TEXT,
         education: DataTypes.TEXT,
         skills: DataTypes.TEXT,

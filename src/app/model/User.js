@@ -8,6 +8,7 @@ class User extends Model {
         email: DataTypes.STRING,
         password: DataTypes.STRING,
         image: DataTypes.STRING,
+        career: DataTypes.STRING,
       },
       {
         sequelize,
@@ -17,7 +18,10 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Profile, { foreignKey: "id", as: "profile" });
+    this.hasOne(models.Profile, {
+      foreignKey: "id",
+      as: "profile",
+    });
   }
 }
 

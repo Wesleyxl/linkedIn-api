@@ -59,15 +59,9 @@ const update = async (req, res) => {
 
 const store = async (req, res) => {
   try {
-    const { publication_id, text } = req.body;
+    const { text } = req.body;
 
     // validating fields
-    if (!publication_id || publication_id === "") {
-      return res.status(400).json({
-        error: "the publication_id field is required",
-      });
-    }
-
     if (!text || text === "") {
       return res.status(400).json({
         error: "the text field is required",

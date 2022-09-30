@@ -9,6 +9,7 @@ const auth = require("./app/middleware/auth");
 const AuthController = require("./app/controller/AuthController");
 const FeedController = require("./app/controller/FeedsController");
 const ProfileController = require("./app/controller/ProfileController");
+const CommentController = require("./app/controller/CommentController");
 
 // auth routes
 router.post("/auth/register", AuthController.register);
@@ -25,5 +26,9 @@ router.post("/feeds/destroy", auth, FeedController.destroy);
 router.get("/profile/me", auth, ProfileController.show);
 router.post("/profile", auth, ProfileController.store);
 router.post("/profile/update", auth, ProfileController.update);
+
+// comments routes
+router.get("/comments/:publication_id", auth, CommentController.index);
+router.post("/comments", auth, CommentController.store);
 
 module.exports = router;

@@ -10,11 +10,15 @@ const AuthController = require("./app/controller/AuthController");
 const FeedController = require("./app/controller/FeedsController");
 const ProfileController = require("./app/controller/ProfileController");
 const CommentController = require("./app/controller/CommentController");
+const UserController = require("./app/controller/UserController");
 
 // auth routes
 router.post("/auth/register", AuthController.register);
 router.post("/auth/login", AuthController.login);
 router.get("/auth/me", auth, AuthController.me);
+
+// users routers
+router.get("/users", auth, UserController.index);
 
 // feeds routes
 router.get("/feeds", auth, FeedController.index);

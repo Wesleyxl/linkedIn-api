@@ -18,9 +18,9 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.Profile, {
-      foreignKey: "id",
-      as: "profile",
+    this.hasMany(models.Feed, {
+      foreignKey: "user_id",
+      as: "feeds",
     });
   }
 }

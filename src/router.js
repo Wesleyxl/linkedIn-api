@@ -3,7 +3,10 @@ const express = require("express");
 const router = express.Router();
 
 // middleware
+const multer = require("multer");
 const auth = require("./app/middleware/auth");
+
+const multerConfig = require("./config/multer");
 
 // controllers
 const AuthController = require("./app/controller/AuthController");
@@ -22,7 +25,12 @@ router.get("/users", auth, UserController.index);
 
 // feeds routes
 router.get("/feeds", auth, FeedController.index);
-router.post("/feeds", auth, FeedController.store);
+router.post(
+  "/feeds",
+  auth,
+  multer(multerConfig).single("file"),
+  FeedController.store
+);
 router.post("/feeds/update", auth, FeedController.update);
 router.post("/feeds/destroy", auth, FeedController.destroy);
 

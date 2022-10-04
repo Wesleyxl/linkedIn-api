@@ -17,8 +17,8 @@ Comment.init(connection);
 
 // models associations
 User.associate(connection.models);
-Profile.associate(connection.models);
 Feed.associate(connection.models);
+Profile.associate(connection.models);
 Comment.associate(connection.models);
 
 module.exports = connection;

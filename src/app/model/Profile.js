@@ -20,10 +20,10 @@ class Profile extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, {
-      foreignKey: "id",
-      as: "user",
-    });
+    // this.belongsTo(models.User, {
+    //   foreignKey: "id",
+    //   as: "user",
+    // });
   }
 }
 

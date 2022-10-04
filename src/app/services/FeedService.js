@@ -1,14 +1,18 @@
 const Feed = require("../model/Feed");
 const User = require("../model/User");
 
+const appConfig = require("../../config/app");
+
 const showAllFeedServices = async () => {
   try {
     const feeds = await Feed.findAll({
+      order: [["id", "DESC"]],
+      attributes: ["id", "text", "likes", "image", "updatedAt"],
       include: [
         {
           model: User,
           as: "user",
-          attributes: ["id", "name", "career", "image"],
+          attributes: ["id", "name", "image"],
         },
       ],
     });
@@ -32,12 +36,14 @@ const showAllFeedServices = async () => {
 
 const createFeedService = async (req, auth_id) => {
   try {
-    const { text, image } = req.body;
+    const { text } = req.body;
+
+    const fileName = await req.file.filename;
 
     const feed = await Feed.create({
-      text,
-      image,
       user_id: auth_id,
+      text,
+      image: `${appConfig.FeedFileUrl}/${fileName}`,
     });
 
     if (!feed) {

@@ -11,13 +11,14 @@ class Feed extends Model {
       },
       {
         sequelize,
+        modelName: "Feed",
       }
     );
   }
 
   static associate(models) {
     this.belongsTo(models.User, {
-      foreignKey: "id",
+      foreignKey: "user_id",
       as: "user",
     });
     this.hasMany(models.Comment, {

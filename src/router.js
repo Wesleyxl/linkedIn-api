@@ -13,6 +13,7 @@ const AuthController = require("./app/controller/AuthController");
 const FeedController = require("./app/controller/FeedsController");
 const CommentController = require("./app/controller/CommentController");
 const UserController = require("./app/controller/UserController");
+const ConnectionController = require("./app/controller/ConnectionController");
 
 // auth routes
 router.post("/auth/register", AuthController.register);
@@ -36,5 +37,8 @@ router.post("/feeds/destroy", auth, FeedController.destroy);
 // comments routes
 router.get("/comments/:publication_id", auth, CommentController.index);
 router.post("/comments", auth, CommentController.store);
+
+// connections routes
+router.get("/connections", auth, ConnectionController.index);
 
 module.exports = router;

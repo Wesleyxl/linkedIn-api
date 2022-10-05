@@ -11,7 +11,6 @@ const multerConfig = require("./config/multer");
 // controllers
 const AuthController = require("./app/controller/AuthController");
 const FeedController = require("./app/controller/FeedsController");
-const ProfileController = require("./app/controller/ProfileController");
 const CommentController = require("./app/controller/CommentController");
 const UserController = require("./app/controller/UserController");
 
@@ -33,11 +32,6 @@ router.post(
 );
 router.post("/feeds/update", auth, FeedController.update);
 router.post("/feeds/destroy", auth, FeedController.destroy);
-
-// profile routes
-router.get("/profile/me", auth, ProfileController.show);
-router.post("/profile", auth, ProfileController.store);
-router.post("/profile/update", auth, ProfileController.update);
 
 // comments routes
 router.get("/comments/:publication_id", auth, CommentController.index);

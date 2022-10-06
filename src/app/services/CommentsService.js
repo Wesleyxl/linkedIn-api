@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Comment = require("../model/Comment");
 const User = require("../model/User");
 
@@ -28,20 +29,17 @@ const createCommentsService = async (req, auth_id) => {
   }
 };
 
-const showComments = async (publication_id) => {
+const showComments = async (publication_id, auth_id) => {
   try {
-    const comments = await Comment.findAll(
-      {
-        include: {
-          model: User,
-          as: "user",
-          attributes: ["id", "name", "career", "image"],
-        },
+    const comments = await Comment.findAll({
+      where: { publication_id },
+      order: [["id", "ASC"]],
+      include: {
+        model: User,
+        as: "user",
+        attributes: ["id", "name", "career", "image"],
       },
-      {
-        where: publication_id,
-      }
-    );
+    });
 
     if (comments.length < 1) {
       return {

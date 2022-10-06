@@ -40,10 +40,27 @@ const createFeedService = async (req, auth_id) => {
 
     const fileName = await req.file.filename;
 
+    if (fileName) {
+      const feed = await Feed.create({
+        user_id: auth_id,
+        text,
+        image: `${appConfig.FeedFileUrl}/${fileName}`,
+      });
+
+      if (!feed) {
+        return {
+          error: "something went wrong",
+        };
+      }
+
+      return {
+        success: true,
+        data: feed,
+      };
+    }
     const feed = await Feed.create({
       user_id: auth_id,
       text,
-      image: `${appConfig.FeedFileUrl}/${fileName}`,
     });
 
     if (!feed) {

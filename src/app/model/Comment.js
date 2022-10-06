@@ -4,6 +4,8 @@ class Comment extends Model {
   static init(sequelize) {
     super.init(
       {
+        publication_id: DataTypes.INTEGER,
+        user_id: DataTypes.INTEGER,
         text: DataTypes.TEXT,
         likes: DataTypes.INTEGER,
       },
@@ -14,8 +16,8 @@ class Comment extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: "id", as: "user" });
-    this.belongsTo(models.Feed, { foreignKey: "id", as: "feed" });
+    this.belongsTo(models.User, { foreignKey: "user_id", as: "user" });
+    this.belongsTo(models.Feed, { foreignKey: "publication_id", as: "feed" });
   }
 }
 

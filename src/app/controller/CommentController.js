@@ -7,7 +7,9 @@ const index = async (req, res) => {
   try {
     const { publication_id } = req.params;
 
-    const response = await showComments(publication_id);
+    const auth_id = res.locals.auth_data.id;
+
+    const response = await showComments(publication_id, auth_id);
 
     if (response.error) {
       return res.status(400).json({

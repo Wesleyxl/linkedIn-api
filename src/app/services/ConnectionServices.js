@@ -20,7 +20,6 @@ const showConnectionsServices = async (auth_id) => {
       data: connections,
     };
   } catch (error) {
-    console.log(error);
     return {
       success: false,
       error,

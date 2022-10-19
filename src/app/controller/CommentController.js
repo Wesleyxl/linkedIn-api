@@ -59,7 +59,19 @@ const store = async (req, res) => {
   }
 };
 
-const update = async (req, res) => {};
+const update = async (req, res) => {
+  try {
+    return res.json({
+      success: true,
+      data: "ok"
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error
+    });
+  }
+};
 
 const destroy = async (req, res) => {};
 
